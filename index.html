@@ -53,18 +53,53 @@
     font-size:.8rem;
     direction:ltr;
   }
+  .header-inner{
+    max-width:1200px; margin:0 auto;
+    padding:22px 20px 20px;
+    text-align:center;
+  }
   header h1{
-    margin:0; padding:22px 20px 6px;
+    margin:0;
     color:#fff;
     letter-spacing:.5px;
     text-shadow:var(--glow);
+    font-family:'Consolas', monospace;
+    font-size:1.7rem;
   }
   header h1 .brand{
     color:var(--amber);
     font-family:'Consolas', monospace;
   }
   header p.tagline{
-    margin:0 0 20px; color:var(--muted); font-size:.95rem;
+    margin:8px 0 0; color:var(--muted); font-size:.95rem;
+  }
+  .topnav{
+    display:flex; justify-content:center; flex-wrap:wrap;
+    gap:8px;
+    margin-top:16px;
+  }
+  .topnav .nav-link{
+    display:inline-flex; align-items:center; gap:6px;
+    color:var(--text);
+    text-decoration:none;
+    padding:7px 16px;
+    border:1px solid var(--border);
+    border-radius:20px;
+    font-size:.88rem;
+    background:var(--panel2);
+    transition:.15s ease;
+  }
+  .topnav .nav-link .ic{font-size:.85rem; opacity:.8;}
+  .topnav .nav-link:hover{
+    border-color:var(--amber2);
+    color:#fff;
+  }
+  .topnav .nav-link.active{
+    background:linear-gradient(90deg, rgba(212,130,58,.25), rgba(245,166,35,.15));
+    border-color:var(--amber);
+    color:#fff;
+    font-weight:600;
+    box-shadow:var(--glow);
   }
 
   .container{
@@ -311,8 +346,16 @@
     <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
     <span class="path">~/souhail-alaoui-services/docs</span>
   </div>
-  <h1>📚 <span class="brand">&lt;SOUHAIL ALAOUI /&gt;</span> Docs</h1>
-  <p class="tagline">مرحبا بك في التوثيق الرسمي — كل شي اللي محتاج تعرفو باش تبدا</p>
+  <div class="header-inner">
+    <h1><span class="brand">&lt;SOUHAIL ALAOUI /&gt;</span></h1>
+    <p class="tagline">📚 التوثيق الرسمي و الدروس</p>
+    <nav class="topnav">
+      <a href="index.html" class="nav-link"><span class="ic">🏁</span> البداية</a>
+      <a href="install.html" class="nav-link"><span class="ic">⚙️</span> التثبيت</a>
+      <a href="tutorial.html" class="nav-link"><span class="ic">🎓</span> الدروس</a>
+      <a href="api.html" class="nav-link"><span class="ic">🔌</span> API</a>
+    </nav>
+  </div>
 </header>
 
 <div class="container">
