@@ -1,97 +1,471 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOUHAIL ALAOUI Docs</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            margin: 0;
-            background: #0f172a;
-            color: #e2e8f0;
-            line-height: 1.8;
-        }
-        header {
-            background: #1e293b;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 2px solid #3b82f6;
-        }
-        header h1 {
-            margin: 0;
-            color: #3b82f6;
-        }
-        .container {
-            display: flex;
-            max-width: 1200px;
-            margin: 20px auto;
-            gap: 20px;
-            padding: 0 20px;
-        }
-        .sidebar {
-            width: 250px;
-            background: #1e293b;
-            padding: 20px;
-            border-radius: 8px;
-        }
-        .sidebar a {
-            display: block;
-            color: #e2e8f0;
-            text-decoration: none;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-        }
-        .sidebar a:hover {
-            background: #3b82f6;
-        }
-        .content {
-            flex: 1;
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 8px;
-        }
-        .content h2 {
-            color: #3b82f6;
-        }
-        code {
-            background: #0f172a;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOUHAIL ALAOUI Docs</title>
+<style>
+  :root{
+    --bg:#120d08;
+    --panel:#1c140c;
+    --panel2:#241a10;
+    --border:#3a2a18;
+    --amber:#f5a623;
+    --amber2:#d4823a;
+    --text:#f0e6d8;
+    --muted:#b0a08c;
+    --glow: 0 0 24px rgba(245,166,35,.35);
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:'Segoe UI', Tahoma, sans-serif;
+    margin:0;
+    background:
+      radial-gradient(circle at 15% 0%, rgba(212,130,58,.18), transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(245,166,35,.12), transparent 45%),
+      var(--bg);
+    color:var(--text);
+    line-height:1.8;
+    min-height:100vh;
+  }
+
+  /* شريط علوي بأسلوب طرفية */
+  header{
+    background:linear-gradient(180deg, var(--panel2), var(--panel));
+    padding:0;
+    text-align:center;
+    border-bottom:1px solid var(--border);
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:blur(6px);
+  }
+  .termbar{
+    display:flex; align-items:center; gap:8px;
+    padding:10px 16px;
+    border-bottom:1px solid rgba(245,166,35,.15);
+    max-width:1200px; margin:0 auto;
+  }
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .dot.r{background:#ef4444;} .dot.y{background:#eab308;} .dot.g{background:#22c55e;}
+  .termbar span.path{
+    margin-inline-start:auto;
+    color:var(--muted);
+    font-family:'Consolas', monospace;
+    font-size:.8rem;
+    direction:ltr;
+  }
+  header h1{
+    margin:0; padding:22px 20px 6px;
+    color:#fff;
+    letter-spacing:.5px;
+    text-shadow:var(--glow);
+  }
+  header h1 .brand{
+    color:var(--amber);
+    font-family:'Consolas', monospace;
+  }
+  header p.tagline{
+    margin:0 0 20px; color:var(--muted); font-size:.95rem;
+  }
+
+  .container{
+    display:flex;
+    max-width:1200px;
+    margin:26px auto;
+    gap:22px;
+    padding:0 20px;
+    align-items:flex-start;
+  }
+
+  /* الشريط الجانبي */
+  .sidebar{
+    width:250px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    padding:18px;
+    border-radius:12px;
+    position:sticky;
+    top:90px;
+  }
+  .sidebar h3{
+    margin:0 0 12px;
+    color:var(--muted);
+    font-size:.78rem;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    padding-inline-start:6px;
+  }
+  .sidebar input[type="text"]{
+    width:100%; padding:9px 10px; margin-bottom:14px;
+    background:var(--panel2); border:1px solid var(--border);
+    border-radius:8px; color:var(--text); font-size:.85rem;
+    outline:none;
+  }
+  .sidebar input[type="text"]:focus{
+    border-color:var(--amber);
+    box-shadow:0 0 0 3px rgba(245,166,35,.15);
+  }
+  .sidebar a{
+    display:flex; align-items:center; gap:10px;
+    color:var(--text);
+    text-decoration:none;
+    padding:10px 12px;
+    margin:4px 0;
+    border-radius:8px;
+    border-inline-start:2px solid transparent;
+    font-size:.92rem;
+    transition:.15s ease;
+  }
+  .sidebar a .ic{opacity:.7; font-size:.85rem;}
+  .sidebar a:hover{
+    background:var(--panel2);
+    border-inline-start-color:var(--amber2);
+  }
+  .sidebar a.active{
+    background:linear-gradient(90deg, rgba(245,166,35,.18), transparent);
+    border-inline-start-color:var(--amber);
+    color:#fff;
+    font-weight:600;
+  }
+
+  /* المحتوى */
+  .content{
+    flex:1;
+    background:var(--panel);
+    border:1px solid var(--border);
+    padding:34px;
+    border-radius:12px;
+    min-width:0;
+  }
+  section{
+    padding-bottom:46px;
+    margin-bottom:46px;
+    border-bottom:1px dashed var(--border);
+    scroll-margin-top:100px;
+  }
+  section:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+
+  .content h2{
+    color:#fff;
+    display:flex; align-items:center; gap:10px;
+    margin-top:0;
+  }
+  .content h2::before{
+    content:"";
+    width:6px; height:22px;
+    background:linear-gradient(180deg, var(--amber), var(--amber2));
+    border-radius:3px;
+    box-shadow:var(--glow);
+  }
+  .content h3{ color:var(--amber); margin-top:28px;}
+  .content p{color:var(--text);}
+  .muted{color:var(--muted);}
+
+  code{
+    background:#100b06;
+    border:1px solid var(--border);
+    padding:2px 7px;
+    border-radius:5px;
+    font-family:'Consolas', monospace;
+    color:#f0c48a;
+    direction:ltr;
+    display:inline-block;
+  }
+
+  .codeblock{
+    position:relative;
+    background:#100b06;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:18px 46px 18px 18px;
+    margin:14px 0;
+    font-family:'Consolas', monospace;
+    font-size:.88rem;
+    color:#f0c48a;
+    direction:ltr;
+    text-align:left;
+    overflow-x:auto;
+    white-space:pre;
+  }
+  .copy-btn{
+    position:absolute; top:10px; left:10px;
+    background:var(--panel2);
+    border:1px solid var(--border);
+    color:var(--muted);
+    border-radius:6px;
+    padding:5px 8px;
+    font-size:.75rem;
+    cursor:pointer;
+    transition:.15s;
+  }
+  .copy-btn:hover{border-color:var(--amber); color:#fff;}
+
+  .steps{list-style:none; padding:0; counter-reset:step;}
+  .steps li{
+    counter-increment:step;
+    position:relative;
+    padding-inline-start:44px;
+    margin:14px 0;
+  }
+  .steps li::before{
+    content:counter(step);
+    position:absolute; inset-inline-start:0; top:0;
+    width:30px; height:30px;
+    background:var(--panel2);
+    border:1px solid var(--amber2);
+    color:var(--amber);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:.85rem;
+  }
+
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:14px;
+    margin-top:16px;
+  }
+  .card{
+    background:var(--panel2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px;
+    transition:.2s;
+  }
+  .card:hover{
+    border-color:var(--amber2);
+    transform:translateY(-3px);
+    box-shadow:var(--glow);
+  }
+  .card .tag{
+    display:inline-block;
+    background:rgba(245,166,35,.15);
+    color:var(--amber);
+    font-size:.7rem;
+    padding:2px 8px;
+    border-radius:20px;
+    margin-bottom:8px;
+  }
+  .card h4{margin:0 0 6px; color:#fff;}
+  .card p{margin:0; color:var(--muted); font-size:.85rem;}
+
+  table{width:100%; border-collapse:collapse; margin-top:14px;}
+  th,td{
+    text-align:right;
+    padding:10px 12px;
+    border-bottom:1px solid var(--border);
+    font-size:.88rem;
+  }
+  th{color:var(--amber); font-size:.78rem; text-transform:uppercase; letter-spacing:.5px;}
+  tr:hover td{background:rgba(245,166,35,.05);}
+  .badge{
+    display:inline-block; padding:2px 8px; border-radius:6px; font-size:.72rem; font-family:'Consolas',monospace;
+  }
+  .badge.get{background:rgba(34,197,94,.15); color:#4ade80;}
+  .badge.post{background:rgba(245,166,35,.15); color:#f0c48a;}
+
+  .faq details{
+    background:var(--panel2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:14px 16px;
+    margin:10px 0;
+    cursor:pointer;
+  }
+  .faq summary{
+    color:#fff; font-weight:600; list-style:none;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:"+"; color:var(--amber); font-size:1.3rem;}
+  .faq details[open] summary::after{content:"−";}
+  .faq p{margin:10px 0 0; color:var(--muted);}
+
+  footer{
+    text-align:center; padding:30px 20px 40px;
+    color:var(--muted); font-size:.82rem;
+  }
+  footer .brand{color:var(--amber); font-family:'Consolas', monospace;}
+
+  #topbtn{
+    position:fixed; bottom:22px; left:22px;
+    width:42px; height:42px;
+    background:var(--amber2);
+    color:#fff; border:none; border-radius:50%;
+    font-size:1.1rem; cursor:pointer;
+    box-shadow:var(--glow);
+    display:none;
+    z-index:60;
+  }
+
+  @media (max-width:800px){
+    .container{flex-direction:column;}
+    .sidebar{width:100%; position:static;}
+    .content{padding:22px;}
+  }
+</style>
 </head>
 <body>
-    <header>
-        <h1>📚 SOUHAIL ALAOUI Documentation</h1>
-        <p>مرحبا بك في التوثيق الرسمي</p>
-    </header>
 
-    <div class="container">
-        <div class="sidebar">
-            <h3>القائمة</h3>
-            <a href="#">البداية</a>
-            <a href="#">التثبيت</a>
-            <a href="#">الدروس</a>
-            <a href="#">API</a>
-            <a href="#">الأسئلة الشائعة</a>
-        </div>
+<header>
+  <div class="termbar">
+    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+    <span class="path">~/souhail-alaoui-services/docs</span>
+  </div>
+  <h1>📚 <span class="brand">&lt;SOUHAIL ALAOUI /&gt;</span> Docs</h1>
+  <p class="tagline">مرحبا بك في التوثيق الرسمي — كل شي اللي محتاج تعرفو باش تبدا</p>
+</header>
 
-        <div class="content">
-            <h2>مرحبا بك 👋</h2>
-            <p>هذا هو الموقع الرسمي للتوثيق ديال <strong>SOUHAIL ALAOUI</strong>.</p>
-            
-            <h3>كيفاش تبدا؟</h3>
-            <p>1. دخل للقائمة على اليسار<br>
-            2. اختار الدرس اللي باغي<br>
-            3. تابع الخطوات</p>
+<div class="container">
+  <div class="sidebar">
+    <h3>القائمة</h3>
+    <input type="text" id="searchBox" placeholder="🔍 قلب على صفحة...">
+    <a href="#start" class="nav-link active"><span class="ic">🏁</span> البداية</a>
+    <a href="#install" class="nav-link"><span class="ic">⚙️</span> التثبيت</a>
+    <a href="#lessons" class="nav-link"><span class="ic">🎓</span> الدروس</a>
+    <a href="#api" class="nav-link"><span class="ic">🔌</span> API</a>
+    <a href="#faq" class="nav-link"><span class="ic">❓</span> الأسئلة الشائعة</a>
+  </div>
 
-            <h3>مثال كود</h3>
-            <code>console.log("Hello SOUHAIL ALAOUI");</code>
-            
-            <p style="margin-top: 30px;">جاهزين نزيدو صفحات جداد؟ 🚀</p>
-        </div>
-    </div>
+  <div class="content">
+
+    <section id="start">
+      <h2>مرحبا بك 👋</h2>
+      <p>هذا هو الموقع الرسمي للتوثيق ديال <strong>SOUHAIL ALAOUI</strong>، فين غادي تلقا كلشي محتاجو باش تبني وتطور المشاريع ديالك.</p>
+
+      <h3>كيفاش تبدا؟</h3>
+      <ul class="steps">
+        <li>دخل للقائمة على اليسار وشوف الأقسام المتوفرة</li>
+        <li>اختار الدرس اللي باغي تبدا بيه حسب المستوى ديالك</li>
+        <li>تابع الخطوات وجرب الكود بنفسك</li>
+        <li>إلا واجهتك مشكلة، شوف قسم الأسئلة الشائعة تحت</li>
+      </ul>
+
+      <div class="card-grid">
+        <div class="card"><span class="tag">مبتدئ</span><h4>تعلم الأساسيات</h4><p>ابدا من الصفر بلا ما تكون خبير فالبرمجة</p></div>
+        <div class="card"><span class="tag">متوسط</span><h4>بناء المشاريع</h4><p>تعلم كيفاش تبني تطبيقات حقيقية</p></div>
+        <div class="card"><span class="tag">متقدم</span><h4>API متقدم</h4><p>دمج الخدمات وبناء أنظمة معقدة</p></div>
+      </div>
+    </section>
+
+    <section id="install">
+      <h2>⚙️ التثبيت</h2>
+      <p>باش تبدا الخدمة على جهازك محليا، تبع هاد الخطوات:</p>
+      <div class="codeblock" data-code='git clone https://github.com/souhail-aloui-services/project.git
+cd project
+npm install
+npm run dev'><button class="copy-btn">نسخ 📋</button>git clone https://github.com/souhail-aloui-services/project.git
+cd project
+npm install
+npm run dev</div>
+      <p class="muted">تأكد أن عندك <code>Node.js</code> version 18 أو أكثر مثبت قبل ما تبدا.</p>
+    </section>
+
+    <section id="lessons">
+      <h2>🎓 الدروس</h2>
+      <p>مثال بسيط باش تبدا:</p>
+      <div class="codeblock" data-code='console.log("Hello SOUHAIL ALAOUI");'><button class="copy-btn">نسخ 📋</button>console.log("Hello SOUHAIL ALAOUI");</div>
+
+      <h3>مثال React</h3>
+      <div class="codeblock" data-code='function Welcome() {
+  return <h1>مرحبا بيك فمشروع SOUHAIL ALAOUI</h1>;
+}'><button class="copy-btn">نسخ 📋</button>function Welcome() {
+  return &lt;h1&gt;مرحبا بيك فمشروع SOUHAIL ALAOUI&lt;/h1&gt;;
+}</div>
+    </section>
+
+    <section id="api">
+      <h2>🔌 مرجع API</h2>
+      <p>لائحة النقاط (endpoints) المتوفرة حاليا:</p>
+      <table>
+        <tr><th>الطريقة</th><th>المسار</th><th>الوصف</th></tr>
+        <tr><td><span class="badge get">GET</span></td><td><code>/api/projects</code></td><td>جلب كل المشاريع</td></tr>
+        <tr><td><span class="badge post">POST</span></td><td><code>/api/projects</code></td><td>إضافة مشروع جديد</td></tr>
+        <tr><td><span class="badge get">GET</span></td><td><code>/api/users/:id</code></td><td>معلومات المستخدم</td></tr>
+      </table>
+    </section>
+
+    <section id="faq">
+      <h2>❓ الأسئلة الشائعة</h2>
+      <div class="faq">
+        <details open>
+          <summary>واش هاد الخدمة مجانية؟</summary>
+          <p>أيوا، الوثائق والأمثلة كاملين متوفرين بلاش لكل المستخدمين.</p>
+        </details>
+        <details>
+          <summary>كيفاش نقدر نتواصل مع الدعم؟</summary>
+          <p>تقدر تفتح issue على GitHub Pages ديال المشروع وغادي نجاوبك فأقرب وقت.</p>
+        </details>
+        <details>
+          <summary>واش كاين نسخة بالفرنسية أو الإنجليزية؟</summary>
+          <p>حاليا التوثيق متوفر بالدارجة، وكاين مشروع لإضافة لغات أخرى قريبا.</p>
+        </details>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<footer>
+  صنع بـ 💜 من طرف <span class="brand">&lt;SOUHAIL ALAOUI /&gt;</span> — © 2026
+</footer>
+
+<button id="topbtn">↑</button>
+
+<script>
+  // تفعيل الرابط النشط حسب موقع الصفحة
+  const links = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('.content section');
+
+  function setActive(){
+    let current = sections[0].id;
+    sections.forEach(sec=>{
+      const rect = sec.getBoundingClientRect();
+      if(rect.top <= 140) current = sec.id;
+    });
+    links.forEach(l=>{
+      l.classList.toggle('active', l.getAttribute('href') === '#'+current);
+    });
+  }
+  window.addEventListener('scroll', setActive);
+  setActive();
+
+  links.forEach(l=>{
+    l.addEventListener('click', e=>{
+      e.preventDefault();
+      const target = document.querySelector(l.getAttribute('href'));
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  // بحث بسيط فأسماء الأقسام
+  document.getElementById('searchBox').addEventListener('input', e=>{
+    const q = e.target.value.trim();
+    if(!q) { links.forEach(l=>l.style.display='flex'); return; }
+    links.forEach(l=>{
+      const match = l.textContent.includes(q);
+      l.style.display = match ? 'flex' : 'none';
+    });
+  });
+
+  // زر نسخ الكود
+  document.querySelectorAll('.copy-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const block = btn.parentElement;
+      const code = block.getAttribute('data-code');
+      navigator.clipboard.writeText(code).then(()=>{
+        btn.textContent = 'تم ✅';
+        setTimeout(()=> btn.textContent = 'نسخ 📋', 1500);
+      });
+    });
+  });
+
+  // زر الرجوع للأعلى
+  const topBtn = document.getElementById('topbtn');
+  window.addEventListener('scroll', ()=>{
+    topBtn.style.display = window.scrollY > 400 ? 'block' : 'none';
+  });
+  topBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+</script>
+
 </body>
 </html>
