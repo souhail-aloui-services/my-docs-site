@@ -319,11 +319,11 @@
   <div class="sidebar">
     <h3>القائمة</h3>
     <input type="text" id="searchBox" placeholder="🔍 قلب على صفحة...">
-    <a href="#start" class="nav-link active"><span class="ic">🏁</span> البداية</a>
-    <a href="#install" class="nav-link"><span class="ic">⚙️</span> التثبيت</a>
-    <a href="#lessons" class="nav-link"><span class="ic">🎓</span> الدروس</a>
-    <a href="#api" class="nav-link"><span class="ic">🔌</span> API</a>
-    <a href="#faq" class="nav-link"><span class="ic">❓</span> الأسئلة الشائعة</a>
+    <a href="index.html" class="nav-link active"><span class="ic">🏁</span> البداية</a>
+    <a href="install.html" class="nav-link"><span class="ic">⚙️</span> التثبيت</a>
+    <a href="tutorial.html" class="nav-link"><span class="ic">🎓</span> الدروس</a>
+    <a href="api.html" class="nav-link"><span class="ic">🔌</span> API</a>
+    <a href="faq.html" class="nav-link"><span class="ic">❓</span> الأسئلة الشائعة</a>
   </div>
 
   <div class="content">
@@ -412,29 +412,12 @@ npm run dev</div>
 <button id="topbtn">↑</button>
 
 <script>
-  // تفعيل الرابط النشط حسب موقع الصفحة
+  // تفعيل الرابط النشط حسب اسم الصفحة الحالية
   const links = document.querySelectorAll('.nav-link');
-  const sections = document.querySelectorAll('.content section');
-
-  function setActive(){
-    let current = sections[0].id;
-    sections.forEach(sec=>{
-      const rect = sec.getBoundingClientRect();
-      if(rect.top <= 140) current = sec.id;
-    });
-    links.forEach(l=>{
-      l.classList.toggle('active', l.getAttribute('href') === '#'+current);
-    });
-  }
-  window.addEventListener('scroll', setActive);
-  setActive();
+  const currentPage = location.pathname.split('/').pop() || 'index.html';
 
   links.forEach(l=>{
-    l.addEventListener('click', e=>{
-      e.preventDefault();
-      const target = document.querySelector(l.getAttribute('href'));
-      target.scrollIntoView({behavior:'smooth', block:'start'});
-    });
+    l.classList.toggle('active', l.getAttribute('href') === currentPage);
   });
 
   // بحث بسيط فأسماء الأقسام
